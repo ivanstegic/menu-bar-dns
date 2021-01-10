@@ -11,9 +11,9 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var statusItem: NSStatusItem?
-
-
-
+    @IBOutlet weak var menu: NSMenu?
+   
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
     }
@@ -27,17 +27,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         super.awakeFromNib()
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        
-        let itemImage = NSImage(named: "menubar-icon")
-        statusItem?.button?.image = itemImage
-        statusItem?.button?.target = self
-        statusItem?.button?.action = #selector(didClickMenubar)
-        
+        statusItem?.button?.image = statusItemImage()
+        statusItem?.menu = menu
     }
     
-    @objc func didClickMenubar() {
-        NSApp.terminate(self)
+    func statusItemImage() -> NSImage? {
+        let image:NSImage? = NSImage(named: NSImage.Name("menubar-icon"))
+        image?.isTemplate = true
+        return image;
+    }
+    
+    @IBAction func didClickMenuHelp(_ sender: Any) {
+        let  url: URL? = URL.init(string: "https://ivanstegic.com/menu-bar-dns/")
+        NSWorkspace.shared.open(url!)
     }
 
+    @IBAction func didClickMenuQuitMenuBarDNS(_ sender: Any) {
+        NSApp.terminate(self)
+    }
 }
 
