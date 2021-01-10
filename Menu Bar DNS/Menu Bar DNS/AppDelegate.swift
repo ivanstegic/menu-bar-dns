@@ -27,32 +27,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         super.awakeFromNib()
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        statusItem?.button?.image = imageForCurrentAppearance()
+        statusItem?.button?.image = statusItemImage()
         statusItem?.menu = menu
-        
-        listenToInterfaceChangesNotification()
     }
     
-    func listenToInterfaceChangesNotification() {
-        DistributedNotificationCenter.default.addObserver(
-            self,
-            selector: #selector(interfaceModeChanged),
-            name: .AppleInterfaceThemeChangedNotification,
-            object: nil
-        )
-    }
-    
-    func imageForCurrentAppearance() -> NSImage? {
-        let type: String? = UserDefaults.standard.string(forKey: UserDefaultKey.AppleInterfaceStyleKey.rawValue) ?? SystemAppearance.SystemAppearanceUnspecified.rawValue
-        
-        if  (type == SystemAppearance.SystemAppearanceDark.rawValue) {
-            return NSImage(named: "menubar-icon-dark")
-        }
-        return NSImage(named: "menubar-icon-light")
-    }
-    
-    @objc func interfaceModeChanged() {
-        statusItem?.button?.image = imageForCurrentAppearance()
+    func statusItemImage() -> NSImage? {
+        let image:NSImage? = NSImage(named: NSImage.Name("menubar-icon"))
+        image?.isTemplate = true
+        return image;
     }
     
     @IBAction func didClickMenuHelp(_ sender: Any) {

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		50283FB425A282DB0024DE31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B5F31825A27F6C0019C43E /* Main.storyboard */; };
-		50289D8325AAA35C00931975 /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50289D8225AAA35C00931975 /* Notification+Name.swift */; };
-		50289D8825AAA69300931975 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50289D8725AAA69300931975 /* Constants.swift */; };
 		50B5F31325A27F6B0019C43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5F31225A27F6B0019C43E /* AppDelegate.swift */; };
 		50B5F31725A27F6C0019C43E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50B5F31625A27F6C0019C43E /* Assets.xcassets */; };
 		50B5F32625A27F6C0019C43E /* Menu_Bar_DNSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5F32525A27F6C0019C43E /* Menu_Bar_DNSTests.swift */; };
@@ -34,8 +32,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		50289D8225AAA35C00931975 /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
-		50289D8725AAA69300931975 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		50B5F30F25A27F6B0019C43E /* Menu Bar DNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Menu Bar DNS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50B5F31225A27F6B0019C43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50B5F31625A27F6C0019C43E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,8 +99,6 @@
 				50B5F31825A27F6C0019C43E /* Main.storyboard */,
 				50B5F31B25A27F6C0019C43E /* Info.plist */,
 				50B5F31C25A27F6C0019C43E /* Menu_Bar_DNS.entitlements */,
-				50289D8225AAA35C00931975 /* Notification+Name.swift */,
-				50289D8725AAA69300931975 /* Constants.swift */,
 			);
 			path = "Menu Bar DNS";
 			sourceTree = "<group>";
@@ -257,8 +251,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				50B5F31325A27F6B0019C43E /* AppDelegate.swift in Sources */,
-				50289D8325AAA35C00931975 /* Notification+Name.swift in Sources */,
-				50289D8825AAA69300931975 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
