@@ -10,23 +10,23 @@ import AppKit
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
+    
     var statusItem: NSStatusItem?
     @IBOutlet weak var menu: NSMenu?
-   
+    
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
     }
-
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         statusItem?.button?.image = statusItemImage()
         statusItem?.button?.target = self
@@ -38,29 +38,41 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let font = NSFont.menuFont(ofSize: 0)
         let fontManger = NSFontManager.shared as NSFontManager
         let boldFont = fontManger.convert(font, toHaveTrait: .boldFontMask)
-        
+        var dnsAdded = false
         let ethernetMenuItem = NSMenuItem(title: "Ethernet", action: nil, keyEquivalent: "")
         let wifiMenuItem = NSMenuItem(title: "Ethernet", action: nil, keyEquivalent: "")
-
+        
         ethernetMenuItem.attributedTitle = NSAttributedString(string: "Ethernet",
                                                               attributes: [NSAttributedString.Key.font: boldFont])
         wifiMenuItem.attributedTitle = NSAttributedString(string: "WiFi",
-                                                              attributes: [NSAttributedString.Key.font: boldFont])
+                                                          attributes: [NSAttributedString.Key.font: boldFont])
         
         menu?.removeAllItems()
-        menu?.addItem(ethernetMenuItem)
- 
-        for dnsAddress in ethernetDNSAddresses {
-            menu?.addItem(NSMenuItem.init(title: "  \(dnsAddress)",
-                                          action: nil,
-                                          keyEquivalent: ""))
-        }
-        menu?.addItem(wifiMenuItem)
         
-        for dnsAddress in wifiDNSAddresses {
-            menu?.addItem(NSMenuItem.init(title: "  \(dnsAddress)",
-                                          action: nil,
-                                          keyEquivalent: ""))
+        if ethernetDNSAddresses.count > 0  {
+            menu?.addItem(ethernetMenuItem)
+            
+            for dnsAddress in ethernetDNSAddresses {
+                menu?.addItem(NSMenuItem.init(title: "  \(dnsAddress)",
+                                              action: nil,
+                                              keyEquivalent: ""))
+            }
+            dnsAdded = true
+        }
+        
+        if wifiDNSAddresses.count > 0 {
+            menu?.addItem(wifiMenuItem)
+            
+            for dnsAddress in wifiDNSAddresses {
+                menu?.addItem(NSMenuItem.init(title: "  \(dnsAddress)",
+                                              action: nil,
+                                              keyEquivalent: ""))
+            }
+            dnsAdded = true
+        }
+        
+        if !dnsAdded {
+            menu?.addItem(withTitle: "Hello!", action: nil, keyEquivalent: "")
         }
         menu?.addItem(NSMenuItem.separator())
         menu?.addItem(withTitle: "Help", action:  #selector(didClickMenuHelp), keyEquivalent: "")
@@ -88,7 +100,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let  url: URL? = URL.init(string: "https://ivanstegic.com/menu-bar-dns/")
         NSWorkspace.shared.open(url!)
     }
-
+    
     @IBAction func didClickMenuQuitMenuBarDNS(_ sender: Any) {
         NSApp.terminate(self)
     }
