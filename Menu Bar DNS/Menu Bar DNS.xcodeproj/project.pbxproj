@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		50283FB425A282DB0024DE31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B5F31825A27F6C0019C43E /* Main.storyboard */; };
+		502FBF7D25ACFA0F006E6150 /* DNSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502FBF7C25ACFA0F006E6150 /* DNSConfiguration.swift */; };
 		50B5F31325A27F6B0019C43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5F31225A27F6B0019C43E /* AppDelegate.swift */; };
 		50B5F31725A27F6C0019C43E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50B5F31625A27F6C0019C43E /* Assets.xcassets */; };
 		50B5F32625A27F6C0019C43E /* Menu_Bar_DNSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5F32525A27F6C0019C43E /* Menu_Bar_DNSTests.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		502FBF7C25ACFA0F006E6150 /* DNSConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSConfiguration.swift; sourceTree = "<group>"; };
 		50B5F30F25A27F6B0019C43E /* Menu Bar DNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Menu Bar DNS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50B5F31225A27F6B0019C43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50B5F31625A27F6C0019C43E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				50B5F31825A27F6C0019C43E /* Main.storyboard */,
 				50B5F31B25A27F6C0019C43E /* Info.plist */,
 				50B5F31C25A27F6C0019C43E /* Menu_Bar_DNS.entitlements */,
+				502FBF7C25ACFA0F006E6150 /* DNSConfiguration.swift */,
 			);
 			path = "Menu Bar DNS";
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				502FBF7D25ACFA0F006E6150 /* DNSConfiguration.swift in Sources */,
 				50B5F31325A27F6B0019C43E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,6 +429,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ivanstegic.app.Menu-Bar-DNS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -444,6 +449,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ivanstegic.app.Menu-Bar-DNS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

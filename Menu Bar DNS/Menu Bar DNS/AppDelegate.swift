@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import AppKit
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -28,7 +29,53 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         statusItem?.button?.image = statusItemImage()
+        statusItem?.button?.target = self
+        statusItem?.button?.action = #selector(didClickMenubar)
+    }
+    
+    func rebuildMenuWithAddress(_ ethernetDNSAddresses:[String], _ wifiDNSAddresses:[String]) {
+        
+        let font = NSFont.menuFont(ofSize: 0)
+        let fontManger = NSFontManager.shared as NSFontManager
+        let boldFont = fontManger.convert(font, toHaveTrait: .boldFontMask)
+        
+        let ethernetMenuItem = NSMenuItem(title: "Ethernet", action: nil, keyEquivalent: "")
+        let wifiMenuItem = NSMenuItem(title: "Ethernet", action: nil, keyEquivalent: "")
+
+        ethernetMenuItem.attributedTitle = NSAttributedString(string: "Ethernet",
+                                                              attributes: [NSAttributedString.Key.font: boldFont])
+        wifiMenuItem.attributedTitle = NSAttributedString(string: "WiFi",
+                                                              attributes: [NSAttributedString.Key.font: boldFont])
+        
+        menu?.removeAllItems()
+        menu?.addItem(ethernetMenuItem)
+ 
+        for dnsAddress in ethernetDNSAddresses {
+            menu?.addItem(NSMenuItem.init(title: "  \(dnsAddress)",
+                                          action: nil,
+                                          keyEquivalent: ""))
+        }
+        menu?.addItem(wifiMenuItem)
+        
+        for dnsAddress in wifiDNSAddresses {
+            menu?.addItem(NSMenuItem.init(title: "  \(dnsAddress)",
+                                          action: nil,
+                                          keyEquivalent: ""))
+        }
+        menu?.addItem(NSMenuItem.separator())
+        menu?.addItem(withTitle: "Help", action:  #selector(didClickMenuHelp), keyEquivalent: "")
+        menu?.addItem(withTitle: "Quit Menu Bar DNS", action:  #selector(didClickMenuQuitMenuBarDNS), keyEquivalent: "")
+    }
+    
+    @objc func didClickMenubar() {
+        let dnsAddresses = DNSConfiguration.getAddresses()
+        let ethernetAddresses = dnsAddresses.0
+        let wifiAddresses = dnsAddresses.1
+        
+        rebuildMenuWithAddress(ethernetAddresses, wifiAddresses)
         statusItem?.menu = menu
+        statusItem?.button?.performClick(self)
+        statusItem?.menu = nil
     }
     
     func statusItemImage() -> NSImage? {
