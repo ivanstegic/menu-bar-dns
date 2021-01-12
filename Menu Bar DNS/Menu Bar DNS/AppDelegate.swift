@@ -35,44 +35,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func rebuildMenuWithAddress(_ ethernetDNSAddresses:[String], _ wifiDNSAddresses:[String]) {
         
-        let font = NSFont.menuFont(ofSize: 0)
-        let fontManger = NSFontManager.shared as NSFontManager
-        let boldFont = fontManger.convert(font, toHaveTrait: .boldFontMask)
         var dnsAdded = false
-        let ethernetMenuItem = NSMenuItem(title: "Ethernet", action: nil, keyEquivalent: "")
-        let wifiMenuItem = NSMenuItem(title: "Ethernet", action: nil, keyEquivalent: "")
-        
-        ethernetMenuItem.attributedTitle = NSAttributedString(string: "Ethernet",
-                                                              attributes: [NSAttributedString.Key.font: boldFont])
-        wifiMenuItem.attributedTitle = NSAttributedString(string: "WiFi",
-                                                          attributes: [NSAttributedString.Key.font: boldFont])
-        
         menu?.removeAllItems()
         
         if ethernetDNSAddresses.count > 0  {
-            menu?.addItem(ethernetMenuItem)
-            
-            for dnsAddress in ethernetDNSAddresses {
-                menu?.addItem(NSMenuItem.init(title: "  \(dnsAddress)",
-                                              action: nil,
-                                              keyEquivalent: ""))
-            }
+            menu?.addItemWithTitle(title: "Ethernet",
+                                   action: nil,
+                                   keyEquivalent: "",
+                                   boldFont: true)
+            menu?.addItemFromList(list: ethernetDNSAddresses,
+                                  action: nil,
+                                  keyEquivalent: "",
+                                  prefix: "  ")
             dnsAdded = true
         }
         
         if wifiDNSAddresses.count > 0 {
-            menu?.addItem(wifiMenuItem)
+            menu?.addItemWithTitle(title: "WiFi",
+                                   action: nil,
+                                   keyEquivalent: "",
+                                   boldFont: true)
+            menu?.addItemFromList(list: wifiDNSAddresses,
+                                  action: nil,
+                                  keyEquivalent: "",
+                                  prefix: "  ")
             
-            for dnsAddress in wifiDNSAddresses {
-                menu?.addItem(NSMenuItem.init(title: "  \(dnsAddress)",
-                                              action: nil,
-                                              keyEquivalent: ""))
-            }
             dnsAdded = true
         }
         
         if !dnsAdded {
-            menu?.addItem(withTitle: "Hello!", action: nil, keyEquivalent: "")
+            menu?.addItem(withTitle: "Disconnected", action: nil, keyEquivalent: "")
         }
         menu?.addItem(NSMenuItem.separator())
         menu?.addItem(withTitle: "Help", action:  #selector(didClickMenuHelp), keyEquivalent: "")

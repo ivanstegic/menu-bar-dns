@@ -50,11 +50,11 @@ class DNSConfiguration: NSObject {
         let dynamicPlist = SCDynamicStoreCopyValue(dynmaicStore, serviceDNSKey)
         let manualAddressPlist = SCDynamicStoreCopyValue(dynmaicStore, serviceSetupDNSKey)
         
-        if let dnsValues = dynamicPlist?[kSCPropNetDNSServerAddresses] as? [String] {
+        if let dnsValues = manualAddressPlist?[kSCPropNetDNSServerAddresses] as? [String] {
             return dnsValues
         }
         
-        if let manualDNS = manualAddressPlist?[kSCPropNetDNSServerAddresses] as? [String] {
+        if let manualDNS = dynamicPlist?[kSCPropNetDNSServerAddresses] as? [String] {
             return manualDNS
         }
         return []
