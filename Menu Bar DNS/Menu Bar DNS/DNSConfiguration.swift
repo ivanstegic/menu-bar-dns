@@ -56,12 +56,11 @@ class DNSConfiguration: NSObject {
         }
         
         if let dhcpValues = dynamicPlist?[kSCPropNetDNSServerAddresses] as? [String] {
-            var allDHCPStr = dhcpValues.joined(separator: "\n")
-            allDHCPStr = allDHCPStr.appending("\n")
-            let updatedDHCPValues = allDHCPStr.replacingOccurrences(of: "\n", with: "(via DHCP)\n")
-            var allDHCPValues = updatedDHCPValues.components(separatedBy: "\n")
-            allDHCPValues = allDHCPValues.filter({ $0 != "" })
-            allDNSIPAddresses += Array(Set(allDHCPValues))
+            let uniqueValues = Array(Set(dhcpValues))
+            for dhcpValue in uniqueValues {
+                let newvalue = dhcpValue.appending(" (via DHCP)")
+                allDNSIPAddresses.append(newvalue)
+            }
         }
         return allDNSIPAddresses
     }
