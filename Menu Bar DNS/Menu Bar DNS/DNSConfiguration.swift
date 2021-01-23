@@ -46,18 +46,23 @@ class DNSConfiguration: NSObject {
         let serviceDNSKey = "State:/Network/Service/\(serviceID)/DNS" as CFString
         let serviceSetupDNSKey = "Setup:/Network/Service/\(serviceID)/DNS" as CFString
         let dynmaicStore =  SCDynamicStoreCreate(kCFAllocatorSystemDefault, "DNSSETTING" as CFString, nil, nil)
+        var allDNSIPAddresses : Array<String> = []
         
         let dynamicPlist = SCDynamicStoreCopyValue(dynmaicStore, serviceDNSKey)
         let manualAddressPlist = SCDynamicStoreCopyValue(dynmaicStore, serviceSetupDNSKey)
         
         if let dnsValues = manualAddressPlist?[kSCPropNetDNSServerAddresses] as? [String] {
-            return dnsValues
+            allDNSIPAddresses += dnsValues
         }
         
-        if let manualDNS = dynamicPlist?[kSCPropNetDNSServerAddresses] as? [String] {
-            return manualDNS
+        if let dhcpValues = dynamicPlist?[kSCPropNetDNSServerAddresses] as? [String] {
+            let uniqueValues = Array(Set(dhcpValues))
+            for dhcpValue in uniqueValues {
+                let newvalue = dhcpValue.appending(" (via DHCP)")
+                allDNSIPAddresses.append(newvalue)
+            }
         }
-        return []
+        return allDNSIPAddresses
     }
     
     static func getAddresses()  -> (Array<String>, Array<String>) {

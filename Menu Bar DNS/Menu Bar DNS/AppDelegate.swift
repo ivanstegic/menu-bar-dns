@@ -77,6 +77,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let wifiAddresses = dnsAddresses.1
         
         rebuildMenuWithAddress(ethernetAddresses, wifiAddresses)
+        menu?.autoenablesItems = false
         statusItem?.menu = menu
         statusItem?.button?.performClick(self)
         statusItem?.menu = nil

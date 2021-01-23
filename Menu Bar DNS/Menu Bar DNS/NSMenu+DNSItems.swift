@@ -24,9 +24,11 @@ extension NSMenu {
     func addItemFromList(list items: [String],  action selector: Selector?, keyEquivalent charCode: String, prefix string:String) {
         
         for itemTitle in items {
-            self.addItem(NSMenuItem.init(title: "\(string)\(itemTitle)",
-                                         action: selector,
-                                         keyEquivalent: charCode))
+            let menuItem = NSMenuItem.init(title: "\(string)\(itemTitle)",
+                                           action: selector,
+                                           keyEquivalent: charCode)
+            menuItem.state = .on
+            self.addItem(menuItem)
         }
     }
 }
