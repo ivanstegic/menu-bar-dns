@@ -52,7 +52,7 @@ class DNSConfiguration: NSObject {
         let manualAddressPlist = SCDynamicStoreCopyValue(dynmaicStore, serviceSetupDNSKey)
         
         if let dnsValues = manualAddressPlist?[kSCPropNetDNSServerAddresses] as? [String] {
-            allDNSIPAddresses += dnsValues
+            return dnsValues
         }
         
         if let dhcpValues = dynamicPlist?[kSCPropNetDNSServerAddresses] as? [String] {
@@ -65,9 +65,44 @@ class DNSConfiguration: NSObject {
         return allDNSIPAddresses
     }
     
-    static func getAddresses()  -> (Array<String>, Array<String>) {
-        var ethernetDNSAddresses : Array<String> = []
-        var WiFiDNSAddresses : Array<String> = []
+    static func saveAddress(interface serviceID: String, ipAddresses dnsServers: [String]) -> (Bool, String){
+        
+        let prefs = SCPreferencesCreate(
+            nil, DNSConfigurationTypeKey as NSString,
+            nil
+        ) as SCPreferences?
+        let allServicesCF = SCNetworkServiceCopyAll(prefs!)
+        let allServices = allServicesCF as? [SCNetworkService]
+        
+        let ourService = allServices?.filter({ (service) -> Bool in
+            guard let id = SCNetworkServiceGetServiceID(service) as String?  else { return false }
+            return id == serviceID
+        })
+        let dictionary = [
+            kSCPropNetDNSServerAddresses: dnsServers,
+        ] as [CFString : Any]
+        
+        if ourService!.count > 0 {
+            let networkProtocol = SCNetworkServiceCopyProtocol(ourService![0], kSCNetworkProtocolTypeDNS)
+            
+            SCPreferencesLock(prefs!, true)
+            if !SCNetworkProtocolSetConfiguration(networkProtocol!, dictionary as CFDictionary) {
+                return (false, String.init(cString: SCErrorString(SCError())))
+            }
+            SCPreferencesUnlock(prefs!)
+            if !SCPreferencesCommitChanges(prefs!) {
+                return (false, String.init(cString: SCErrorString(SCError())))
+            }
+            if !SCPreferencesApplyChanges(prefs!) {
+                return (false, String.init(cString: SCErrorString(SCError())))
+            }
+            return (true, "")
+        }
+        return (false, "Unknown Network Service!")
+    }
+    
+    static func getAddresses()  -> (Array<NetworkInterface>) {
+        var networkInterfaces : Array<NetworkInterface> = []
         
         do {
             
@@ -83,20 +118,31 @@ class DNSConfiguration: NSObject {
             })
             let serviceTypeByIDs = try getnterfaceTypeByServiceIDs(allConnectedServices!) as Dictionary<String, String>?
             for (id, type) in serviceTypeByIDs! {
+                var DNSIPAddresses : Array<String>
+                var serviceType : NetworkServiceType
+                
                 switch (type) {
-                case  ServiceTypeWiFi:
-                    WiFiDNSAddresses += getDNSForServiceID(id)
+                case ServiceTypeWiFi:
+                    DNSIPAddresses = getDNSForServiceID(id)
+                    serviceType = .WiFI
+                    
                 case ServiceTypeEthernet:
-                    ethernetDNSAddresses += getDNSForServiceID(id)
+                    DNSIPAddresses = getDNSForServiceID(id)
+                    serviceType = .Ethernet
                 default:
-                    print("")
+                    DNSIPAddresses = []
+                    serviceType = .Unknown
+                }
+                
+                if serviceType != .Unknown {
+                    networkInterfaces.append(NetworkInterface(serviceID: id, dnsIPAddreses: DNSIPAddresses, serviceType: serviceType))
                 }
             }
         }
         catch {
-            return ([], [])
+            print("error while fetching dns addresses")
         }
-        return (ethernetDNSAddresses, WiFiDNSAddresses)
+        return networkInterfaces
     }
     
 }

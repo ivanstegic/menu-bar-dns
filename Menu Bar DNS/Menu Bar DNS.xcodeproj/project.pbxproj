@@ -10,6 +10,8 @@
 		50283FB425A282DB0024DE31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B5F31825A27F6C0019C43E /* Main.storyboard */; };
 		502FBF7D25ACFA0F006E6150 /* DNSConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502FBF7C25ACFA0F006E6150 /* DNSConfiguration.swift */; };
 		502FBF8225AD1AD7006E6150 /* NSMenu+DNSItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502FBF8125AD1AD7006E6150 /* NSMenu+DNSItems.swift */; };
+		50A14C3825C193B7005A3850 /* NetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A14C3725C193B7005A3850 /* NetworkInterface.swift */; };
+		50A7452A25BD6F580049C2C1 /* DNSConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A7452925BD6F580049C2C1 /* DNSConfigurationView.swift */; };
 		50B5F31325A27F6B0019C43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5F31225A27F6B0019C43E /* AppDelegate.swift */; };
 		50B5F31725A27F6C0019C43E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50B5F31625A27F6C0019C43E /* Assets.xcassets */; };
 		50B5F32625A27F6C0019C43E /* Menu_Bar_DNSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B5F32525A27F6C0019C43E /* Menu_Bar_DNSTests.swift */; };
@@ -36,6 +38,8 @@
 /* Begin PBXFileReference section */
 		502FBF7C25ACFA0F006E6150 /* DNSConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSConfiguration.swift; sourceTree = "<group>"; };
 		502FBF8125AD1AD7006E6150 /* NSMenu+DNSItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenu+DNSItems.swift"; sourceTree = "<group>"; };
+		50A14C3725C193B7005A3850 /* NetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterface.swift; sourceTree = "<group>"; };
+		50A7452925BD6F580049C2C1 /* DNSConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSConfigurationView.swift; sourceTree = "<group>"; };
 		50B5F30F25A27F6B0019C43E /* Menu Bar DNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Menu Bar DNS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50B5F31225A27F6B0019C43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50B5F31625A27F6C0019C43E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 				50B5F31C25A27F6C0019C43E /* Menu_Bar_DNS.entitlements */,
 				502FBF7C25ACFA0F006E6150 /* DNSConfiguration.swift */,
 				502FBF8125AD1AD7006E6150 /* NSMenu+DNSItems.swift */,
+				50A7452925BD6F580049C2C1 /* DNSConfigurationView.swift */,
+				50A14C3725C193B7005A3850 /* NetworkInterface.swift */,
 			);
 			path = "Menu Bar DNS";
 			sourceTree = "<group>";
@@ -190,7 +196,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					50B5F30E25A27F6B0019C43E = {
 						CreatedOnToolsVersion = 12.0;
@@ -258,6 +264,8 @@
 			files = (
 				502FBF8225AD1AD7006E6150 /* NSMenu+DNSItems.swift in Sources */,
 				502FBF7D25ACFA0F006E6150 /* DNSConfiguration.swift in Sources */,
+				50A7452A25BD6F580049C2C1 /* DNSConfigurationView.swift in Sources */,
+				50A14C3825C193B7005A3850 /* NetworkInterface.swift in Sources */,
 				50B5F31325A27F6B0019C43E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,6 +434,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Menu Bar DNS/Menu_Bar_DNS.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Menu Bar DNS/Info.plist";
@@ -446,6 +455,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Menu Bar DNS/Menu_Bar_DNS.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Menu Bar DNS/Info.plist";

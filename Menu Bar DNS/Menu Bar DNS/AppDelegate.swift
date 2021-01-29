@@ -23,6 +23,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
     
+    func applicationDidBecomeActive(_ aNotification: Notification) {
+        // Insert code here to tear down your application
+        showStatusbarMenu()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,34 +37,43 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem?.button?.action = #selector(didClickMenubar)
     }
     
-    func rebuildMenuWithAddress(_ ethernetDNSAddresses:[String], _ wifiDNSAddresses:[String]) {
+    func rebuildMenuWithInterfaces(_ networkInterface:[NetworkInterface]) {
         
         var dnsAdded = false
         menu?.removeAllItems()
+        let ethernetInterfaces = networkInterface.filter{ $0.serviceType == .Ethernet && $0.dnsIPAddreses.count > 0 }
+        let wifiInterfaces = networkInterface.filter{ $0.serviceType == .WiFI && $0.dnsIPAddreses.count > 0 }
         
-        if ethernetDNSAddresses.count > 0  {
+        if ethernetInterfaces.count > 0 {
             menu?.addItemWithTitle(title: "Ethernet",
                                    action: nil,
                                    keyEquivalent: "",
                                    boldFont: true)
-            menu?.addItemFromList(list: ethernetDNSAddresses,
-                                  action: nil,
-                                  keyEquivalent: "",
-                                  prefix: "  ")
             dnsAdded = true
+            
+            
+            for networkInterface in ethernetInterfaces {
+                menu?.addIPAddressesFromInterface(interface: networkInterface,
+                                      action: nil,
+                                      keyEquivalent: "")
+                
+            }
         }
         
-        if wifiDNSAddresses.count > 0 {
+        if wifiInterfaces.count > 0 {
             menu?.addItemWithTitle(title: "WiFi",
                                    action: nil,
                                    keyEquivalent: "",
                                    boldFont: true)
-            menu?.addItemFromList(list: wifiDNSAddresses,
-                                  action: nil,
-                                  keyEquivalent: "",
-                                  prefix: "  ")
-            
             dnsAdded = true
+            
+            
+            for networkInterface in wifiInterfaces {
+                menu?.addIPAddressesFromInterface(interface: networkInterface,
+                                      action: nil,
+                                      keyEquivalent: "")
+                
+            }
         }
         
         if !dnsAdded {
@@ -72,11 +85,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func didClickMenubar() {
-        let dnsAddresses = DNSConfiguration.getAddresses()
-        let ethernetAddresses = dnsAddresses.0
-        let wifiAddresses = dnsAddresses.1
-        
-        rebuildMenuWithAddress(ethernetAddresses, wifiAddresses)
+        if NSApp.isActive {
+            showStatusbarMenu()
+        } else {
+            NSApp.activate(ignoringOtherApps: true)
+        }
+    }
+    
+    func showStatusbarMenu() {
+        let networkInterfaces = DNSConfiguration.getAddresses()
+        rebuildMenuWithInterfaces(networkInterfaces)
         menu?.autoenablesItems = false
         statusItem?.menu = menu
         statusItem?.button?.performClick(self)
@@ -97,5 +115,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func didClickMenuQuitMenuBarDNS(_ sender: Any) {
         NSApp.terminate(self)
     }
+    
 }
 

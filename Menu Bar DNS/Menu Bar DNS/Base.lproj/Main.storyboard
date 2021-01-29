@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -704,5 +705,112 @@
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="u6M-Ws-6oT">
+            <objects>
+                <viewController storyboardIdentifier="DNSConfigurationView" id="3kP-iY-pfg" sceneMemberID="viewController">
+                    <view key="view" id="x5L-yy-BwK" customClass="DNSConfigurationView" customModule="Menu_Bar_DNS" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="121" height="20"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField identifier="IP Address Input" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CXz-RM-FB9" userLabel="Ip Address Input">
+                                <rect key="frame" x="15" y="1" width="81" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="KHD-fj-UVO"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="71" id="V8O-hb-ADo"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="add ip address..." drawsBackground="YES" id="ulL-7M-MmD">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <accessibility identifier="IP Address Input"/>
+                                <connections>
+                                    <action selector="addNewDNSAddress:" target="x5L-yy-BwK" id="p6g-h3-tFu"/>
+                                </connections>
+                            </textField>
+                            <button verticalHuggingPriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="YE6-hx-84b">
+                                <rect key="frame" x="97" y="1" width="16" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="FTb-9g-d7c"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hZE-Ee-UMH">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showAddNewFieldAndButton:" target="x5L-yy-BwK" id="0ub-1T-FeJ"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" verticalHuggingPriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="uG6-tr-bV2">
+                                <rect key="frame" x="97" y="0.0" width="16" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="LWo-LK-5DV"/>
+                                    <constraint firstAttribute="width" constant="16" id="fF4-mO-5a4"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSMenuOnStateTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2mU-4z-r3O">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addNewDNSAddress:" target="x5L-yy-BwK" id="Yf9-s5-dED"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Hd-gs-hTd">
+                                <rect key="frame" x="25" y="3" width="56" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="52" id="Kin-ol-89j"/>
+                                    <constraint firstAttribute="height" constant="16" id="wH2-2t-Ed0"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Ethernet" id="i9m-42-OSf">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yC6-ns-ih2">
+                                <rect key="frame" x="13" y="4" width="13" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="13" id="8AJ-Np-V5U"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSMenuOnStateTemplate" id="ByO-EF-v8u"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="9Hd-gs-hTd" firstAttribute="top" secondItem="x5L-yy-BwK" secondAttribute="top" constant="1" id="37O-fo-Gqe"/>
+                            <constraint firstItem="uG6-tr-bV2" firstAttribute="top" secondItem="x5L-yy-BwK" secondAttribute="top" constant="19" id="674-5d-f4U"/>
+                            <constraint firstItem="CXz-RM-FB9" firstAttribute="leading" secondItem="x5L-yy-BwK" secondAttribute="leading" constant="15" id="8Gz-y2-q2d"/>
+                            <constraint firstAttribute="bottom" secondItem="CXz-RM-FB9" secondAttribute="bottom" constant="1" id="B0s-MJ-Zpu"/>
+                            <constraint firstAttribute="trailing" secondItem="uG6-tr-bV2" secondAttribute="trailing" constant="8" id="F1x-Ai-51E"/>
+                            <constraint firstItem="yC6-ns-ih2" firstAttribute="top" secondItem="x5L-yy-BwK" secondAttribute="top" constant="5" id="H3h-75-epg"/>
+                            <constraint firstItem="YE6-hx-84b" firstAttribute="centerY" secondItem="9Hd-gs-hTd" secondAttribute="centerY" id="SZW-My-tne"/>
+                            <constraint firstItem="uG6-tr-bV2" firstAttribute="leading" secondItem="CXz-RM-FB9" secondAttribute="trailing" constant="1" id="TXP-Xc-7Sh"/>
+                            <constraint firstItem="YE6-hx-84b" firstAttribute="bottom" secondItem="yC6-ns-ih2" secondAttribute="bottom" constant="4" id="TZD-gz-wbv"/>
+                            <constraint firstItem="CXz-RM-FB9" firstAttribute="top" secondItem="9Hd-gs-hTd" secondAttribute="bottom" constant="2" id="Uq3-Qs-Pn2"/>
+                            <constraint firstAttribute="trailing" secondItem="YE6-hx-84b" secondAttribute="trailing" constant="8" id="ZfW-EI-UHn"/>
+                            <constraint firstItem="YE6-hx-84b" firstAttribute="top" secondItem="x5L-yy-BwK" secondAttribute="top" id="c2N-xN-mFD"/>
+                            <constraint firstItem="YE6-hx-84b" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9Hd-gs-hTd" secondAttribute="trailing" constant="8" symbolic="YES" id="ppI-9Z-XlD"/>
+                            <constraint firstItem="9Hd-gs-hTd" firstAttribute="leading" secondItem="yC6-ns-ih2" secondAttribute="trailing" constant="1" id="rtE-Em-pCr"/>
+                            <constraint firstItem="yC6-ns-ih2" firstAttribute="leading" secondItem="x5L-yy-BwK" secondAttribute="leading" constant="13" id="srz-DD-ZxR"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="dnsIPAddressAddValueButtonHeight" destination="LWo-LK-5DV" id="fZY-RV-VYm"/>
+                            <outlet property="dnsIPAddressLabel" destination="9Hd-gs-hTd" id="uH3-Ue-dEE"/>
+                            <outlet property="dnsIPAddressTextField" destination="CXz-RM-FB9" id="ddZ-BY-Xzu"/>
+                            <outlet property="dnsIPAddressTextFieldHeight" destination="KHD-fj-UVO" id="Fks-He-egj"/>
+                            <outlet property="dnsIPServerActiveState" destination="yC6-ns-ih2" id="3VW-t3-OGv"/>
+                            <outlet property="dnsIPShowAddValueButton" destination="uG6-tr-bV2" id="ll9-Uu-b5C"/>
+                            <outlet property="dnsIPShowTextFieldButton" destination="YE6-hx-84b" id="JX7-TA-dFX"/>
+                        </connections>
+                    </view>
+                </viewController>
+                <customObject id="CSZ-QV-rmR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-210.5" y="-393"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="NSAddTemplate" width="14" height="13"/>
+        <image name="NSMenuOnStateTemplate" width="14" height="13"/>
+    </resources>
 </document>
